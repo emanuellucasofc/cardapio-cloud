@@ -13,31 +13,8 @@ const staffOrdersUpdateRoutes = require("./routes/staffOrdersUpdate");
 
 const app = express();
 
-// ✅ CORS PRIMEIRO (antes de qualquer rota)
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://cardapio-frontend-6vb4.onrender.com",
-];
-
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://cardapio-frontend-6vb4.onrender.com",
-];
-
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(null, false);
-  },
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "x-staff-token"],
-};
-
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // ✅ DEIXA SÓ ESTA
-
-// ✅ Preflight global (muito importante)
+app.use(cors());
+app.options("*", cors());
 
 // ✅ JSON
 app.use(express.json());
