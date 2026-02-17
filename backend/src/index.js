@@ -13,10 +13,12 @@ const staffOrdersUpdateRoutes = require("./routes/staffOrdersUpdate");
 
 const app = express();
 
+/* ===== CORS TOTALMENTE ABERTO (TESTE PRODUÇÃO) ===== */
 app.use(cors());
 app.options("*", cors());
 
-// ✅ JSON
+/* ================================================ */
+
 app.use(express.json());
 
 // rotas
@@ -25,7 +27,6 @@ app.use("/api/menu", menuRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/orders", ordersRoutes);
 
-// staff
 app.use("/api/staff/orders", staffOrdersRoutes);
 app.use("/api/staff/orders", staffOrdersStreamRoutes);
 app.use("/api/staff/orders", staffOrdersUpdateRoutes);
