@@ -19,24 +19,25 @@ const allowedOrigins = [
   "https://cardapio-frontend-6vb4.onrender.com",
 ];
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://cardapio-frontend-6vb4.onrender.com",
+];
+
 const corsOptions = {
   origin: (origin, callback) => {
-    // permite chamadas sem origin (Render healthcheck, curl, Postman)
     if (!origin) return callback(null, true);
-
     if (allowedOrigins.includes(origin)) return callback(null, true);
-
-    return callback(null, false); // não joga erro, só nega
+    return callback(null, false);
   },
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "x-staff-token"],
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // ✅ preflight com a MESMA config
+app.options("*", cors(corsOptions)); // ✅ DEIXA SÓ ESTA
 
 // ✅ Preflight global (muito importante)
-app.options("*", cors());
 
 // ✅ JSON
 app.use(express.json());
