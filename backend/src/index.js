@@ -15,7 +15,7 @@ const app = express();
 
 /* ===== CORS TOTALMENTE ABERTO (TESTE PRODUÇÃO) ===== */
 app.use(cors());
-app.options("*", cors());
+app.options("/", cors());
 
 /* ================================================ */
 
