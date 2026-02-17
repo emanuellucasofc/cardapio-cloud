@@ -1,0 +1,12 @@
+# Ignorar variáveis de ambiente
+**/.env
+
+# Ignorar node_modules
+**/node_modules
+
+# Ignorar build do front
+frontend/dist
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
