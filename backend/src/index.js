@@ -19,20 +19,21 @@ const allowedOrigins = [
   "https://cardapio-frontend-6vb4.onrender.com",
 ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // permite chamadas sem origin (ex: Postman/Render healthchecks)
-      if (!origin) return callback(null, true);
+const corsOptions = {
+  origin: (origin, callback) => {
+    // permite chamadas sem origin (Render healthcheck, curl, Postman)
+    if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
 
-      return callback(new Error("Not allowed by CORS: " + origin));
-    },
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "x-staff-token"],
-  })
-);
+    return callback(null, false); // não joga erro, só nega
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "x-staff-token"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // ✅ preflight com a MESMA config
 
 // ✅ Preflight global (muito importante)
 app.options("*", cors());
