@@ -8,9 +8,6 @@ router.get("/stream", requireStaff, async (req, res) => {
   const restaurantId = req.query.restaurantId || "default";
 
   // headers SSE
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-staff-token");
-res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS")
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
